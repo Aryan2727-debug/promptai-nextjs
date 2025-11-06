@@ -40,6 +40,10 @@ const Nav = () => {
       <div className="sm:flex hidden">
         {session?.user ? (
             <div className="flex gap-3 md:gap-5">
+              <Link href="/prompt-library" className="black_btn">
+                Prompt Library
+              </Link>
+
               <Link href="/create-prompt" className="black_btn">
                 Create Post
               </Link>
@@ -58,6 +62,9 @@ const Nav = () => {
             </div>
         ) : (
             <>
+             <Link href="/prompt-library" className="black_btn mr-3">
+               Prompt Library
+             </Link>
              {
                 providers &&
                  Object.values(providers).map((provider) => (
@@ -87,6 +94,9 @@ const Nav = () => {
               <div className="dropdown">
                 <Link href="/profile" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   My Profile
+                </Link>
+                <Link href="/prompt-library" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
+                  Prompt Library
                 </Link>
                 <Link href="/create-prompt" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   Create Prompt
