@@ -74,7 +74,7 @@ const PromptLibrary = () => {
             className={`px-5 py-2 rounded-full font-satoshi font-semibold text-sm transition-all ${
               selectedCategory === category
                 ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg"
-                : "bg-white text-gray-700 border border-gray-300 hover:border-blue-500 hover:shadow-md"
+                : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-purple-500 hover:shadow-md"
             }`}
           >
             {category}
@@ -84,8 +84,8 @@ const PromptLibrary = () => {
 
       {/* Prompt Count */}
       <div className="mt-6 text-center">
-        <p className="font-inter text-sm text-gray-600">
-          Showing <span className="font-semibold text-gray-900">{filteredPrompts.length}</span> prompt{filteredPrompts.length !== 1 ? 's' : ''}
+        <p className="font-inter text-sm text-gray-600 dark:text-gray-400">
+          Showing <span className="font-semibold text-gray-900 dark:text-gray-100">{filteredPrompts.length}</span> prompt{filteredPrompts.length !== 1 ? 's' : ''}
         </p>
       </div>
 
@@ -97,10 +97,10 @@ const PromptLibrary = () => {
           ))
         ) : (
           <div className="text-center w-full py-10">
-            <p className="font-satoshi text-gray-500 text-lg">
+            <p className="font-satoshi text-gray-500 dark:text-gray-400 text-lg">
               No prompts found matching your criteria.
             </p>
-            <p className="font-inter text-sm text-gray-400 mt-2">
+            <p className="font-inter text-sm text-gray-400 dark:text-gray-500 mt-2">
               Try adjusting your search or category filter.
             </p>
           </div>

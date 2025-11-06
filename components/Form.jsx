@@ -13,24 +13,24 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
       <form onSubmit={handleSubmit} className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism">
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700">Your AI Prompt</span>
+          <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">Your AI Prompt</span>
 
           <textarea value={post.prompt} onChange={(e) => setPost({...post, prompt: e.target.value})} 
           placeholder="Write your prompt here..." required className="form_textarea"/>
         </label>
 
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700">Tag {` `}<span className="font-normal">(#product, #webdevelopment, #idea)</span></span>
+          <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">Tag {` `}<span className="font-normal">(#product, #webdevelopment, #idea)</span></span>
 
           <input value={post.tag} onChange={(e) => setPost({...post, tag: e.target.value})} 
           placeholder="#tag" required className="form_input"/>
         </label>
 
         <div className="flex-end mx-3 mb-5 gap-4">
-         <Link href="/" className="text-gray-500 text-sm">Cancel</Link>
+         <Link href="/" className="text-gray-500 dark:text-gray-400 text-sm hover:text-gray-700 dark:hover:text-gray-300">Cancel</Link>
         </div>
 
-        <button className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white" type="submit" disabled={submitting}>{submitting ? `${type}...` : type}</button>
+        <button className="px-5 py-1.5 text-sm bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 rounded-full text-white hover:shadow-lg transition-all" type="submit" disabled={submitting}>{submitting ? `${type}...` : type}</button>
       </form>
     </section>
   );

@@ -21,7 +21,7 @@ const LibraryPromptCard = ({ prompt }) => {
               {prompt.category}
             </span>
           </div>
-          <h3 className="font-satoshi font-bold text-gray-900 text-lg">
+          <h3 className="font-satoshi font-bold text-gray-900 dark:text-gray-100 text-lg">
             {prompt.title}
           </h3>
         </div>
@@ -36,7 +36,7 @@ const LibraryPromptCard = ({ prompt }) => {
         </div>
       </div>
 
-      <p className="my-4 font-satoshi text-sm text-gray-700 leading-relaxed">
+      <p className="my-4 font-satoshi text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
         {prompt.prompt}
       </p>
 
@@ -44,7 +44,7 @@ const LibraryPromptCard = ({ prompt }) => {
         {prompt.tags.map((tag, index) => (
           <span
             key={index}
-            className="text-xs px-2 py-1 rounded-md bg-gray-100 text-gray-600 font-inter"
+            className="text-xs px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-inter"
           >
             #{tag}
           </span>

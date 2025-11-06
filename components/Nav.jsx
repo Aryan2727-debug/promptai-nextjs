@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import ThemeToggle from './ThemeToggle';
 
 const Nav = () => {
 
@@ -39,7 +40,9 @@ const Nav = () => {
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {session?.user ? (
-            <div className="flex gap-3 md:gap-5">
+            <div className="flex gap-3 md:gap-5 items-center">
+              <ThemeToggle />
+              
               <Link href="/prompt-library" className="black_btn">
                 Prompt Library
               </Link>
@@ -62,7 +65,8 @@ const Nav = () => {
             </div>
         ) : (
             <>
-             <Link href="/prompt-library" className="black_btn mr-3">
+             <ThemeToggle />
+             <Link href="/prompt-library" className="black_btn ml-3 mr-3">
                Prompt Library
              </Link>
              {
@@ -78,7 +82,8 @@ const Nav = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="sm:hidden flex relative">
+      <div className="sm:hidden flex relative gap-3 items-center">
+        <ThemeToggle />
         {session?.user ? (
           <div className="flex">
           <Image 
