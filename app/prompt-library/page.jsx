@@ -1,16 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import LibraryPromptCard from "@components/LibraryPromptCard";
 import { libraryPrompts, getCategories, filterByCategory, searchPrompts } from "@utils/libraryPrompts";
 
 const PromptLibrary = () => {
+  const { data: session } = useSession();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchText, setSearchText] = useState("");
   const [filteredPrompts, setFilteredPrompts] = useState(libraryPrompts);
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
   
   const categories = getCategories();
+
+  // Fetch user's bookmarks
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      if (!session?.user) return;
+
+      try {
+        const response = await fetch("/api/bookmarks");
+        if (response.ok) {
+          const bookmarks = await response.json();
+          const ids = new Set(bookmarks.map(b => b.promptId));
+          setBookmarkedIds(ids);
+        }
+      } catch (error) {
+        console.error("Error fetching bookmarks:", error);
+      }
+    };
+
+    fetchBookmarks();
+  }, [session]);
 
   useEffect(() => {
     // Apply filters whenever category or search changes
@@ -40,6 +63,18 @@ const PromptLibrary = () => {
         setSearchText(e.target.value);
       }, 300)
     );
+  };
+
+  const handleBookmarkChange = (promptId, isBookmarked) => {
+    setBookmarkedIds(prev => {
+      const newSet = new Set(prev);
+      if (isBookmarked) {
+        newSet.add(promptId.toString());
+      } else {
+        newSet.delete(promptId.toString());
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -93,7 +128,12 @@ const PromptLibrary = () => {
       <div className="mt-10 prompt_layout">
         {filteredPrompts.length > 0 ? (
           filteredPrompts.map((prompt) => (
-            <LibraryPromptCard key={prompt.id} prompt={prompt} />
+            <LibraryPromptCard 
+              key={prompt.id} 
+              prompt={prompt}
+              isBookmarked={bookmarkedIds.has(prompt.id.toString())}
+              onBookmarkChange={handleBookmarkChange}
+            />
           ))
         ) : (
           <div className="text-center w-full py-10">
